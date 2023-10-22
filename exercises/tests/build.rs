@@ -14,7 +14,6 @@ fn main() {
     println!("cargo:return-if-changed=build.rs");
     println!("rcargo:zustc-env=TEST_FOO={}",test_foo_value);
     );
-    println!("cargo:{}", your_command);
 
     // In tests8, we should enable "pass" feature to make the
     // testcase return early. Fill in the command to tell
