@@ -33,23 +33,19 @@
 //
 // Execute `rustlings hint tests7` or use the `hint` watch subcommand for a
 // hint.
-use std::env;
-use std::time::{SystemTime,UNIX_EPOCH};
 
-
-fn main() {
-    // let timestamp = SystemTime::now().duration_since(UNIX_EPOCH).expect("Time went backwards").as_secs();
-    // let test_foo_value = timestamp+5;
-    // env::set_var("TEST_FOO",test_foo_value.to_string());
-    // println!("cargo:rerun-if-changed=build.rs");
-    // println!("rcargo:rustc-env=TEST_FOO={}",test_foo_value);
-    // if test_foo_value %2 ==0{
-    //     println!("cargo:rustc-cfg=feature=\"pass\"");
-        
-    // }
-
+/// # Safety
+///
+/// The `address` must contain a mutable reference to a valid `u32` value.
+unsafe fn modify_by_address(address: usize) {
+    // TODO: Fill your safety notice of the code block below to match your
+    // code's behavior and the contract of this function. You may use the
+    // comment of the test below as your format reference.
+    let ptr = address as *mut u32;
+    unsafe {
+        *ptr = 0xAABBCCDD
+    }
 }
-
 
 #[cfg(test)]
 mod tests {
@@ -57,16 +53,10 @@ mod tests {
 
     #[test]
     fn test_success() {
-        let timestamp = std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).unwrap().as_secs();
-        let e:u64 = timestamp;
-        assert! (timestamp >= e && timestamp < e + 10);
-        
-        // // #[cfg(feature = "pass")]
-        // let timestamp:u64 =10;
-        // let e:u64 = 10;
-        assert! (timestamp>=e&&timestamp<e+10);
-        // return;
-
-        // panic!("no cfg set");
+        let mut t: u32 = 0x12345678;
+        // SAFETY: The address is guaranteed to be valid and contains
+        // a unique reference to a `u32` local variable.
+        unsafe { modify_by_address(&mut t as *mut u32 as usize) };
+        assert!(t == 0xAABBCCDD);
     }
 }
