@@ -38,7 +38,6 @@ use std::env;
 use std::time::{SystemTime,UNIX_EPOCH};
 
 fn main() {}
-
 #[cfg(test)]
 mod tests {
     use super::*;
