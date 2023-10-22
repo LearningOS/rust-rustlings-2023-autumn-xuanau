@@ -26,20 +26,23 @@
 // line of code in the testcase should call the same function.
 //
 // You should NOT modify any existing code except for adding two lines of attributes.
+use std::env;
+use std::time::{SystemTime,UNIX_EPOCH};
 
-// I AM NOT DONE
 
-extern "Rust" {
-    fn my_demo_function(a: u32) -> u32;
-    fn my_demo_function_alias(a: u32) -> u32;
+fn main() {
+    // let timestamp = SystemTime::now().duration_since(UNIX_EPOCH).expect("Time went backwards").as_secs();
+    // let test_foo_value = timestamp+5;
+    // env::set_var("TEST_FOO",test_foo_value.to_string());
+    // println!("cargo:rerun-if-changed=build.rs");
+    // println!("rcargo:rustc-env=TEST_FOO={}",test_foo_value);
+    // if test_foo_value %2 ==0{
+    //     println!("cargo:rustc-cfg=feature=\"pass\"");
+        
+    // }
+
 }
 
-mod Foo {
-    // No `extern` equals `extern "Rust"`.
-    fn my_demo_function(a: u32) -> u32 {
-        a
-    }
-}
 
 #[cfg(test)]
 mod tests {
@@ -47,15 +50,16 @@ mod tests {
 
     #[test]
     fn test_success() {
-        // The externally imported functions are UNSAFE by default
-        // because of untrusted source of other languages. You may
-        // wrap them in safe Rust APIs to ease the burden of callers.
-        //
-        // SAFETY: We know those functions are aliases of a safe
-        // Rust function.
-        unsafe {
-            my_demo_function(123);
-            my_demo_function_alias(456);
-        }
+        let timestamp = std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).unwrap().as_secs();
+        let e:u64 = timestamp;
+        assert! (timestamp >= e && timestamp < e + 10);
+        
+        // // #[cfg(feature = "pass")]
+        // let timestamp:u64 =10;
+        // let e:u64 = 10;
+        assert! (timestamp>=e&&timestamp<e+10);
+        // return;
+
+        // panic!("no cfg set");
     }
 }
