@@ -35,11 +35,20 @@
 // hint.
 
 
+fn main() {}
+
 #[cfg(test)]
 mod tests {
+    use super::*;
+
     #[test]
-    fn you_can_assert() {
-        let a = 5;
-        assert!(a>0,"a is bigger than 0");
+    fn test_success() {
+        let timestamp = std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .unwrap()
+            .as_secs();
+        let s = std::env::var("TEST_FOO").unwrap();
+        let e: u64 = s.parse().unwrap();
+        assert!(timestamp >= e && timestamp < e + 10);
     }
 }
