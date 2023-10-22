@@ -10,12 +10,11 @@
 // Execute `rustlings hint tests1` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
-
 #[cfg(test)]
 mod tests {
     #[test]
     fn you_can_assert() {
-        assert!();
+        let a = 5;
+        assert!(a>0,"a is bigger than 0");
     }
 }
