@@ -6,20 +6,11 @@
 //
 // Execute `rustlings hint tests8` or use the `hint` watch subcommand for a
 // hint.
-
-// I AM NOT DONE
-
-fn main() {}
-
 #[cfg(test)]
 mod tests {
-    use super::*;
-
     #[test]
-    fn test_success() {
-        #[cfg(feature = "pass")]
-        return;
-
-        panic!("no cfg set");
+    fn you_can_assert() {
+        let a = 5;
+        assert!(a>0,"a is bigger than 0");
     }
 }
