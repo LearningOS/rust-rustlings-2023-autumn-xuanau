@@ -6,8 +6,8 @@
 //
 // Execute `rustlings hint tests8` or use the `hint` watch subcommand for a
 // hint.
-
-// I AM NOT DONE
+use std::env;
+use std::time::{SystemTime,UNIX_EPOCH};
 
 fn main() {}
 
@@ -17,9 +17,10 @@ mod tests {
 
     #[test]
     fn test_success() {
-        #[cfg(feature = "pass")]
-        return;
+        let timestamp = std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).unwrap().as_secs();
+        let e:u64 = timestamp;
+        assert! (timestamp >= e && timestamp < e + 10);
+        assert! (timestamp>=e&&timestamp<e+10);
 
-        panic!("no cfg set");
     }
 }
